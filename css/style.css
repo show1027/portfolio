@@ -364,6 +364,7 @@ li {
 
 .works-url {
   font-size: 10px;
+  display: none;
 }
 
 .works-image.fadein {
