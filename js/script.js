@@ -46,6 +46,17 @@ $(function () {
     return false;
   });
 
+  $(function(){
+    $('#js-page-top').hide();
+    $(window).scroll(function () {
+        if($(window).scrollTop() > 0) {
+            $('#js-page-top').fadeIn(600);
+        } else {
+            $('#js-page-top').fadeOut(200);
+        }
+    });
+});
+
   // スライド
   var mySwiper = new Swiper ('.swiper-container', {
     effect: 'fade',
@@ -63,8 +74,10 @@ $(function () {
     const scrollAmount = $(window).scrollTop();
     $('.scrollanime').each(function () {
         const targetPosition = $(this).offset().top;
-        if(scrollAmount > targetPosition - wHeight + 60) {
+        if(scrollAmount > targetPosition - wHeight + 20) {
           $(this).addClass("fadeInDown");
+        } else {
+          $(this).removeClass("fadeInDown");
         }
     });
   });
@@ -73,24 +86,29 @@ $(function () {
   window.onload = function() {
   const spinner = document.getElementById('loading');
   spinner.classList.add('loaded');
-}
-
-// ハンバーガーメニュー
-var $nav   = $('#navArea');
-var $btn   = $('.toggle_btn');
-var $mask  = $('#mask');
-var open   = 'open'; // class
-// menu open close
-$btn.on( 'click', function() {
-  if ( ! $nav.hasClass( open ) ) {
-    $nav.addClass( open );
-  } else {
-    $nav.removeClass( open );
   }
-});
-// mask close
-$mask.on('click', function() {
-  $nav.removeClass( open );
-});
+  //10秒たったら強制的にロード画面を非表示
+  $(function(){
+    setTimeout('stopload()',5000);
+  });
+    
+
+  // ハンバーガーメニュー
+  var $nav   = $('#navArea');
+  var $btn   = $('.toggle_btn');
+  var $mask  = $('#mask');
+  var open   = 'open'; // class
+  // menu open close
+  $btn.on( 'click', function() {
+    if ( ! $nav.hasClass( open ) ) {
+      $nav.addClass( open );
+    } else {
+      $nav.removeClass( open );
+    }
+  });
+  // mask close
+  $mask.on('click', function() {
+    $nav.removeClass( open );
+  });
   
 });
