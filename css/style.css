@@ -5,14 +5,14 @@
 }
 
 body {
-  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",
-  "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", YuGothic,
-  "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium",
+    "游ゴシック体", YuGothic, "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   font-size: 15px;
-  line-height: 1.8;
-  letter-spacing: .8px;
+  line-height: 1.5em !important;
+  letter-spacing: 0.8px;
   word-break: break-all;
   color: #333;
+  overflow-x: hidden;
 }
 
 a {
@@ -42,19 +42,19 @@ li {
 
 .hover-action {
   display: block;
-  -webkit-transition: all .3s;
-  transition: all .3s;
-  -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .1);
-  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .1);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 .hover-action:hover {
-  -webkit-transition: all .3s;
-  transition: all .3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
   -webkit-transform: translate(0, -4px);
   transform: translate(0, -4px);
-  -webkit-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, .12);
-  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, .12);
+  -webkit-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.12);
 }
 
 /*--------------------------------
@@ -79,7 +79,8 @@ li {
   height: 40px;
 }
 
-.double-bounce1, .double-bounce2 {
+.double-bounce1,
+.double-bounce2 {
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -88,31 +89,38 @@ li {
   position: absolute;
   top: 0%;
   left: 0%;
-  
-  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
-  animation: sk-bounce 2.0s infinite ease-in-out;
+
+  -webkit-animation: sk-bounce 2s infinite ease-in-out;
+  animation: sk-bounce 2s infinite ease-in-out;
 }
 
 .double-bounce2 {
-  -webkit-animation-delay: -1.0s;
-  animation-delay: -1.0s;
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
 }
 
 @-webkit-keyframes sk-bounce {
-  0%, 100% { -webkit-transform: scale(0.0) }
-  50% { -webkit-transform: scale(1.0) }
+  0%,
+  100% {
+    -webkit-transform: scale(0);
+  }
+  50% {
+    -webkit-transform: scale(1);
+  }
 }
 
 @keyframes sk-bounce {
-  0%, 100% { 
-    transform: scale(0.0);
-    -webkit-transform: scale(0.0);
-  } 50% { 
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
+  0%,
+  100% {
+    transform: scale(0);
+    -webkit-transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+    -webkit-transform: scale(1);
   }
 }
- 
+
 .loaded {
   opacity: 0;
   visibility: hidden;
@@ -122,7 +130,9 @@ li {
  スライドイン用
 ---------------------------------*/
 /*1.フェードインアニメーションの指定*/
-.scrollanime {opacity: 0;} /*一瞬表示されるのを防ぐ*/
+.scrollanime {
+  opacity: 0;
+} /*一瞬表示されるのを防ぐ*/
 
 .fadeInDown {
   animation-name: fadeInDown;
@@ -131,22 +141,32 @@ li {
 }
 @keyframes fadeInDown {
   0% {
-    opacity: 0;         
+    opacity: 0;
   }
   100% {
-  opacity: 1;
-  transform: translate(0);
+    opacity: 1;
+    transform: translate(0);
   }
 }
- 
+
 /*2.上下の動きを指定*/
-.updown {transform: translateY(-100px);}
-.downup {transform: translateY(100px);}
- 
+.updown {
+  transform: translateY(-100px);
+}
+.downup {
+  transform: translateY(100px);
+}
+
 /*3.左右の動きを指定*/
-.sect02{overflow: hidden;} /*横スクロールバーを隠す*/
-.slide-right {transform: translateX(200px);}
-.slide-left {transform: translateX(-200px);}
+.sect02 {
+  overflow: hidden;
+} /*横スクロールバーを隠す*/
+.slide-right {
+  transform: translateX(200px);
+}
+.slide-left {
+  transform: translateX(-200px);
+}
 
 /*--------------------------------
  文字
@@ -157,7 +177,7 @@ li {
   font-weight: normal;
   line-height: 1;
   margin-bottom: 15px;
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
 }
 
 .section-heading {
@@ -228,14 +248,14 @@ li {
   font-family: "Open sans", sans-serif;
   font-size: 64px;
   line-height: 1;
-  letter-spacing: .2em;
+  letter-spacing: 0.2em;
 }
 
 .logo-subtitle {
   font-size: 20px;
   margin-top: 5px;
   text-align: center;
-  letter-spacing: .2em;
+  letter-spacing: 0.2em;
 }
 
 #navArea {
@@ -245,17 +265,17 @@ li {
 /*-------------------------------
 背景用の動画ファイル
 ---------------------------------*/
-#bg-video{
- position: absolute;
- right: 0;
- bottom: 0;
- min-width: 100%;
- min-height: 100%;
- width: auto;
- height: auto;
- z-index: -100;
- background: url('img/firstview.png') no-repeat;
- background-size: cover;
+#bg-video {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  background: url("img/firstview.png") no-repeat;
+  background-size: cover;
 }
 
 /*-------------------------------
@@ -275,9 +295,9 @@ li {
   z-index: 100;
   width: 100%;
   background-color: #fff;
-  -webkit-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, .2);
-  -moz-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, .2);
-  box-shadow: 0 3px 3px -3px rgba(0, 0, 0, .2);
+  -webkit-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.2);
 }
 
 .gnav-list {
@@ -290,15 +310,15 @@ li {
   font-family: "Open sans", sans-serif;
   font-size: 16px;
   padding: 0 24px;
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
 }
 
 .gnav-link {
   position: relative;
   display: inline-block;
   padding: 20px 0;
-  -webkit-transition: .3s;
-  transition: .3s;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
   color: #333;
 }
 
@@ -313,7 +333,7 @@ li {
   width: 0;
   height: 3px;
   content: "";
-  transition: .3s;
+  transition: 0.3s;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
   background-color: #333;
@@ -399,18 +419,57 @@ service
 .service-items {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 80px;
+  flex-wrap: wrap;
+}
+
+@media screen and (min-width:556px) and ( max-width:1024px) {
+  .service-item {
+    width: 45%;
+  }
+  .service-item-text {
+    font-size: 14px;
+  }
 }
 
 .service-item {
   background-color: #fff;
   color: #555;
-  box-shadow: 0px 0px 10px 0px #000;
-  /* border: 1px solid #555; */
   position: relative;
   width: 30%;
-  padding: 40px 20px 20px;
+  padding: 40px;
+  margin:2em 0;
+  border-top: solid 2px black;
+  border-bottom: solid 2px black;
+}
+
+@media screen and (min-width:768px) and ( max-width:1024px) {
+  .service-item {
+    width: 45%;
+  }
+  .service-item-text {
+    font-size: 14px;
+  }
+}
+
+.service-item:before, .service-item:after{
+  content: '';
+  position: absolute;
+  top: -10px;
+  width: 2px;
+  height: -webkit-calc(100% + 20px);
+  height: calc(100% + 20px);
+  background-color: black;
+}
+.service-item:before {
+  left: 10px;
+}
+.service-item:after {
+  right: 10px;
+}
+.service-item p {
+  margin: 0; 
+  padding: 0;
 }
 
 .service-item-logo {
@@ -421,7 +480,7 @@ service
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  box-shadow: 0 0 12px 0;
+  border: 1px solid #555;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -432,22 +491,22 @@ service
 
 .service-item-title {
   text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 18px;
-    font-size: 1.125rem;
-    font-weight: 700;
-    color: #f6b483;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 18px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #f6b483;
 }
 
 .btn {
   position: relative;
-    width: 250px;
-    height: 50px;
-    overflow: hidden;
-    line-height: 50px;
-    margin: 0 auto;
-    color: #fff ;
+  width: 250px;
+  height: 50px;
+  overflow: hidden;
+  line-height: 50px;
+  margin: 0 auto;
+  color: #fff;
 }
 
 .btn .btn-cover {
@@ -467,7 +526,8 @@ service
   text-align: center;
 }
 
-.btn .btn-link:active, .btn-link:hover {
+.btn .btn-link:active,
+.btn-link:hover {
   outline-width: 0;
   cursor: pointer;
   transition: all 0.5s ease;
@@ -576,7 +636,7 @@ service
   display: inline-block;
   width: 100%;
   height: 20px;
-  letter-spacing: .3em;
+  letter-spacing: 0.3em;
 }
 
 .rate:before,
@@ -682,22 +742,31 @@ service
   font-size: 12px;
   font-weight: bold;
   display: block;
-  padding: 10px;
   cursor: pointer;
   text-align: center;
-  background-color: #ccc;
-  width: 5%;
+  background-color: #000;
+  /* border: 1px solid rgb(199, 143, 118); */
+  border-radius: 999px;
+  width: 60px;
+  height: 60px;
+  line-height: 70px;
   margin: 0 auto;
+}
+
+.page-top {
+  position: fixed;
+  right: 30px;
+  bottom: 90px;
 }
 
 .page-top i {
   font-size: 200%;
-  transition: 0.5s linear;
+  transition: 0.3s linear;
+  color: #fff;
 }
 
-.page-top i:hover {
-  transition: 0.5s all ;
-  font-size: 300%;
+.page-top:hover {
+  font-size: 100%;
 }
 
 /*media Queries 767
@@ -782,7 +851,7 @@ service
     overflow-x: hidden;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    transition: .5s;
+    transition: 0.5s;
     z-index: 3;
   }
 
@@ -819,7 +888,6 @@ service
     background: #e4e4e4;
   }
 
-
   /*============
   .toggle_btn
   =============*/
@@ -831,7 +899,7 @@ service
     width: 60px;
     height: 30px;
     transform: translate(0, 0);
-    transition: all .5s;
+    transition: all 0.5s;
     cursor: pointer;
     z-index: 3;
   }
@@ -847,7 +915,7 @@ service
     width: 30px;
     height: 2px;
     background-color: #666;
-    transition: all .5s;
+    transition: all 0.5s;
   }
 
   .toggle_btn span:nth-child(1) {
@@ -899,10 +967,10 @@ service
     width: 100%;
     height: 100%;
     background: #000;
-    opacity: .8;
+    opacity: 0.8;
     z-index: 2;
     cursor: pointer;
-    transition: all .5s;
+    transition: all 0.5s;
   }
 
   /* ヘッダー */
@@ -921,7 +989,7 @@ service
 
   .logo-title {
     font-size: 28px;
-    letter-spacing: .16em;
+    letter-spacing: 0.16em;
   }
 
   .logo-subtitle {
@@ -1006,19 +1074,20 @@ service
   .service-item {
     margin: 0 auto;
     margin-bottom: 80px;
-    width: 80%;
+    width: 100%;
   }
 
-  .btn .btn-link:active, .btn-link:hover {
+  .btn .btn-link:active,
+  .btn-link:hover {
     background: #555;
   }
 
   /*--------------------------------
  Price
 ---------------------------------*/
-.price-list {
-  width: 100%;
-}
+  .price-list {
+    width: 100%;
+  }
 
   /* About */
   .about-item {
@@ -1092,8 +1161,15 @@ service
   .footer .inner {
     padding: 20px 0;
   }
+}
 
-  .page-top {
-    width: 100%;
+/*media Queries 556 - 1024
+----------------------------------------------------*/
+@media screen and (min-width:5768px) and ( max-width:1024px) {
+  .service-item {
+    width: 45%;
+  }
+  .service-item-text {
+    font-size: 14px;
   }
 }
