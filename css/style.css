@@ -40,6 +40,14 @@ li {
   display: none;
 }
 
+.br436 {
+  display: none;
+}
+
+.br567 {
+  display: none;
+}
+
 .hover-action {
   display: block;
   -webkit-transition: all 0.3s;
@@ -397,6 +405,26 @@ li {
   opacity: 1;
 }
 
+.small {
+  font-size: 12px;
+}
+
+.big {
+  font-size: 20px;
+}
+
+.performance {
+  text-align: center;
+  padding-top: 60px;
+  font-size: 14px;
+}
+
+.attention {
+  text-align: center;
+  padding-top: 15px;
+  font-size: 14px;
+}
+
 /*-------------------------------
 service
 ---------------------------------*/
@@ -524,13 +552,13 @@ service
   top: 0;
   left: 0;
   text-align: center;
+  transition: all 0.5s ease;
 }
 
 .btn .btn-link:active,
 .btn-link:hover {
   outline-width: 0;
   cursor: pointer;
-  transition: all 0.5s ease;
   background-color: #f33;
 }
 
@@ -1055,6 +1083,10 @@ service
     margin-bottom: 30px;
   }
 
+  .attention {
+    font-size: 12px;
+  }
+
   /* Feature */
   .feature-item {
     display: block;
@@ -1160,6 +1192,22 @@ service
   /* フッター */
   .footer .inner {
     padding: 20px 0;
+  }
+}
+
+/*media Queries 436
+----------------------------------------------------*/
+@media screen and (max-width: 436px) {
+  .br436 {
+    display: block;
+  }
+}
+
+/*media Queries 567
+----------------------------------------------------*/
+@media screen and (max-width: 567px) {
+  .br567 {
+    display: block;
   }
 }
 
