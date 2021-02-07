@@ -1046,10 +1046,10 @@ service
 
   .swiper-container {
     width: 100%;
+    height: 100vh;
   }
 
   .swiper-container img {
-    height: 100vh;
     max-width: 100%;
   }
 
