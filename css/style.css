@@ -44,7 +44,7 @@ li {
   display: none;
 }
 
-.br567 {
+.sp567-only {
   display: none;
 }
 
@@ -413,9 +413,20 @@ li {
   font-size: 20px;
 }
 
-.performance {
+.performance-pc {
   text-align: center;
   padding-top: 60px;
+  font-size: 14px;
+}
+
+.performance-sp {
+  text-align: center;
+  padding-top: 60px;
+  font-size: 14px;
+}
+
+.works-section .sp567-only p {
+  text-align: center;
   font-size: 14px;
 }
 
@@ -1206,7 +1217,10 @@ service
 /*media Queries 567
 ----------------------------------------------------*/
 @media screen and (max-width: 567px) {
-  .br567 {
+  .pc567-only {
+    display: none;
+  }
+  .sp567-only {
     display: block;
   }
 }
