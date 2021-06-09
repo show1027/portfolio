@@ -1,114 +1,243 @@
-// PhotoSwipe
-initPhotoSwipeFromDOM(".js-my-gallery");
-
+// スムーススクロール
 $(function () {
-
-  //iOS対策
-  //iOSでは疑似要素を含むaタグのリンクは２回タップしないと遷移とページ内スクロールをしないため、
-  //ユーザーエージェント判定でiOSの場合はbodyタグにiosを付与し、対象の疑似要素をdisplay: noneする
-  var ua = navigator.userAgent;
-  if (/iPhone|iPad|iPod/.test(ua)) {
-    $("body").addClass("ios");
-  }
-
-  //Worksのリンクを有効化
-  //スライド（Swiper）内に記載のリンクを有効にするため下記の記述が必要 (;´･ω･)ｳｰﾝ･･･
-  $(".works-url").on("click", "a", function (e) {
-    e.stopPropagation();
-  });
-
-  //ページ内スクロール
-  var $nav = $(".gnav");
-  var navHeight = $nav.outerHeight();
-
-  $('a[href^="#"]').on("click", function () {
-    var href = $(this).attr("href");
-    var target = $(href == "#" || href == "" ? "html" : href);
-    var position = target.offset().top - navHeight;
-    $("html, body").animate(
-      {
-        scrollTop: position,
-      },
-      300,
-      "swing"
-    );
-    return false;
-  });
-
-  //ページトップ
-  $("#js-page-top").on("click", function () {
-    $("body,html").animate(
-      {
-        scrollTop: 0,
-      },
-      300
-    );
-    return false;
-  });
-
-  $(function(){
-    $('#js-page-top').hide();
-    $(window).scroll(function () {
-        if($(window).scrollTop() > 0) {
-            $('#js-page-top').fadeIn(600);
-        } else {
-            $('#js-page-top').fadeOut(200);
-        }
+    $('a[href^="#"]').click(function () {
+      let speed = 500;
+      let href = $(this).attr("href");
+      let target = $(href == "#" || href == "" ? "html" : href);
+      let position = target.offset().top;
+      $("html, body").animate({ scrollTop: position }, speed, "swing");
+      return false;
     });
 });
 
-  // スライド
-  var mySwiper = new Swiper ('.swiper-container', {
-    effect: 'fade',
-    autoplay: {
-      delay: 5000,
-      stopOnLastSlide: false,
-      disableOnInteraction: false,
-      reverseDirection: false
-    }
-  });
+// ヘッダー名前
+new Vivus('move', {
+    type: 'oneByOne',
+    duration: 150,
+    forceRender: false,
+    animTimingFunction: Vivus.EASE_OUT
+})
 
-  // スライドイン
-  $(window).scroll(function () {
-    const wHeight = $(window).height();
-    const scrollAmount = $(window).scrollTop();
-    $('.scrollanime').each(function () {
-        const targetPosition = $(this).offset().top;
-        if(scrollAmount > targetPosition - wHeight + 20) {
-          $(this).addClass("fadeInDown");
-        } else {
-          $(this).removeClass("fadeInDown");
-        }
-    });
-  });
-
-  // ローディング画面
-  window.onload = function() {
-  const spinner = document.getElementById('loading');
-  spinner.classList.add('loaded');
-  }
-  //10秒たったら強制的にロード画面を非表示
-  $(function(){
-    setTimeout('stopload()',5000);
-  });
-    
-
-  // ハンバーガーメニュー
-  var $nav   = $('#navArea');
-  var $btn   = $('.toggle_btn');
-  var $mask  = $('#mask');
-  var open   = 'open'; // class
-  // menu open close
-  $btn.on( 'click', function() {
-    if ( ! $nav.hasClass( open ) ) {
-      $nav.addClass( open );
+// ハンバーガーメニュー
+var $nav = $('#navArea');
+var $btn = $('.toggle_btn');
+var $mask = $('.gnav-item');
+var $link = $('.gnav-link');
+var open = 'open'; // class
+// menu open close
+$btn.on('click', function () {
+    if (!$nav.hasClass(open)) {
+        $nav.addClass(open);
+        $("html").addClass("is-fixed");
     } else {
-      $nav.removeClass( open );
+        $nav.removeClass(open);
+        $("html").removeClass("is-fixed");
     }
-  });
-  // mask close
-  $mask.on('click', function() {
-    $nav.removeClass( open );
-  });
-  
+});
+// mask close
+$link.on('click', function () {
+    if ($nav.hasClass(open)) {
+        $nav.removeClass(open);
+        $("html").removeClass("is-fixed");
+    }
+});
+
+AOS.init()
+
+// Swiper
+var mySwiper = new Swiper('.swiper-container', {
+	slidesPerView: 1,
+    spaceBetween: 50,
+    autoplay: {
+        delay: 5000,
+    },
+    loop: true,
+	breakpoints: {
+		1300: {
+            slidesPerView: 3,
+            currentSlides: true
+		},
+		600: {
+			slidesPerView: 2
+		}
+	},
+	navigation: {
+		nextEl: '.swiper-button-next',
+		prevEl: '.swiper-button-prev'
+	}
+});
+
+// フッターでハンバーガーメニューとロゴの色を変える
+function changeColor() {
+    var timing = 80; //タイミング調整
+
+    var scrollY = window.pageYOffset;
+    var body = document.body;
+
+    var trigger1 = document.getElementById('js-section-1');
+    var trigger2 = document.getElementById('js-section-2');
+
+    var trigger1Y = trigger1.getBoundingClientRect().top; // ウィンドウ上からの要素の位置
+    var trigger2Y = trigger2.getBoundingClientRect().top;
+
+    // 白背景の時はbodyの.bg-is-blackを削除
+    // 黒背景の時はbodyに.bt-is-blackを付与
+    if(trigger2Y - timing > 0 && 0 >= trigger1Y - timing) {
+        body.classList.remove('bg-is-black');
+    } else {
+        body.classList.add('bg-is-black');
+    }
+}
+window.addEventListener('scroll', changeColor);
+
+//下から表示させる要素を指定
+let $pagetop2 = $('.toggle_btn');
+
+$(window).on('scroll', function () {
+  //スクロール位置を取得
+    if ( $(this).scrollTop() < 500 ) {
+    $pagetop2.removeClass('logo-active');
+    } else {
+    $pagetop2.addClass('logo-active');
+    }
+});
+
+// ヘッダーアニメーション
+particlesJS('hoge', {
+    "particles": {
+
+        //--シェイプの設定----------
+        "number": {
+            "value": 80, //シェイプの数
+            "density": {
+                "enable": true, //シェイプの密集度を変更するか否か
+                "value_area": 200, //シェイプの密集度
+            }
+        },
+        "shape": {
+            "type": "circle", //シェイプの形（circle:丸、edge:四角、triangle:三角、polygon:多角形、star:星型、image:画像）
+            "stroke": {
+                "width": 0, //シェイプの外線の太さ
+                "color": "#ffcc00" //シェイプの外線の色
+            },
+            //typeをpolygonにした時の設定
+            "polygon": {
+                "nb_sides": 5 //多角形の角の数
+            },
+            //typeをimageにした時の設定
+            "image": {
+                "src": "images/hoge.png",
+                "width": 100,
+                "height": 100
+            }
+        },
+        "color": {
+            "value": "#ffffff" //シェイプの色
+        },
+        "opacity": {
+            "value": 1, //シェイプの透明度
+            "random": false, //シェイプの透明度をランダムにするか否か
+            "anim": {
+                "enable": false, //シェイプの透明度をアニメーションさせるか否か
+                "speed": 10, //アニメーションのスピード
+                "opacity_min": 0.1, //透明度の最小値
+                "sync": false //全てのシェイプを同時にアニメーションさせるか否か
+            }
+        },
+        "size": {
+            "value": 5, //シェイプの大きさ
+            "random": true, //シェイプの大きさをランダムにするか否か
+            "anim": {
+                "enable": false, //シェイプの大きさをアニメーションさせるか否か
+                "speed": 40, //アニメーションのスピード
+                "size_min": 0.1, //大きさの最小値
+                "sync": false //全てのシェイプを同時にアニメーションさせるか否か
+            }
+        },
+        //--------------------
+
+        //--線の設定----------
+        "line_linked": {
+            "enable": true, //線を表示するか否か
+            "distance": 150, //線をつなぐシェイプの間隔
+            "color": "#ffffff", //線の色
+            "opacity": 0.4, //線の透明度
+            "width": 1 //線の太さ
+        },
+        //--------------------
+
+        //--動きの設定----------
+        "move": {
+            "speed": 3, //シェイプの動くスピード
+            "straight": false, //個々のシェイプの動きを止めるか否か
+            "direction": "none", //エリア全体の動き(none、top、top-right、right、bottom-right、bottom、bottom-left、left、top-leftより選択)
+            "out_mode": "out" //エリア外に出たシェイプの動き(out、bounceより選択)
+        }
+        //--------------------
+
+    },
+
+    "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+
+            //--マウスオーバー時の処理----------
+            "onhover": {
+                "enable": false, //マウスオーバーが有効か否か
+                "mode": "repulse" //マウスオーバー時に発動する動き(下記modes内のgrab、repulse、bubbleより選択)
+            },
+            //--------------------
+
+            //--クリック時の処理----------
+            "onclick": {
+                "enable": true, //クリックが有効か否か
+                "mode": "push" //クリック時に発動する動き(下記modes内のgrab、repulse、bubble、push、removeより選択)
+            },
+            //--------------------
+
+        },
+
+        "modes": {
+
+            //--カーソルとシェイプの間に線が表示される----------
+            "grab": {
+                "distance": 400, //カーソルからの反応距離
+                "line_linked": {
+                    "opacity": 1 //線の透明度
+                }
+            },
+            //--------------------
+
+            //--シェイプがカーソルから逃げる----------
+            "repulse": {
+                "distance": 200 //カーソルからの反応距離
+            },
+            //--------------------
+
+            //--シェイプが膨らむ----------
+            "bubble": {
+                "distance": 400, //カーソルからの反応距離
+                "size": 40, //シェイプの膨らむ大きさ
+                "opacity": 8, //膨らむシェイプの透明度
+                "duration": 2, //膨らむシェイプの持続時間(onclick時のみ)
+                "speed": 3 //膨らむシェイプの速度(onclick時のみ)
+            },
+            //--------------------
+
+            //--シェイプが増える----------
+            "push": {
+                "particles_nb": 4 //増えるシェイプの数
+            },
+            //--------------------
+
+            //--シェイプが減る----------
+            "remove": {
+                "particles_nb": 2 //減るシェイプの数
+            }
+            //--------------------
+
+        }
+    },
+    "retina_detect": true, //Retina Displayを対応するか否か
+    "resize": true //canvasのサイズ変更にわせて拡大縮小するか否か
 });
